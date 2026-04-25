@@ -1,5 +1,29 @@
 #include <stdio.h>
 #include <stdlib.h>
+struct Task 
+{
+    char name[100]; //Stores task name max 100 characters
+    int isDone; //To check task status
+};
+
+struct Task tasks[10]; // Array to hold upto 10 tasks
+int taskCount=0; //Counts how many tasks were added
+
+void addTask()
+{
+    if(taskCount<10)
+    {
+        printf("\nEnter task name: ");
+        scanf(" %[^\n]", tasks[taskCount].name); //Reads full task name including spaces
+        tasks[taskCount].isDone=0; //New task will be always pending
+        taskCount++;
+        printf("Task Added Successfully!\n");
+    }
+    else
+    {
+        printf("\nTask list is full!\n");
+    }
+}
 int main()
 {
     int choice;
@@ -24,7 +48,7 @@ int main()
         switch (choice)
         {
         case 1:
-            printf("\n[Add task -Comming Soon]\n");
+            addTask(); //addTask() function call
             break;
         case 2:
             printf("\n[View tasks -Comming Soon]\n");
@@ -40,7 +64,7 @@ int main()
             break;
         case 6:
             printf("\nStay Disciplined! Good Luck!\n");
-            exit(0);
+            exit(0); // This function is used from the stdlib.h library
         default:
             printf("\nInvalid Choice! Please enter 1-6.\n");
         }
