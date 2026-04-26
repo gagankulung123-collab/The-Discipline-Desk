@@ -24,6 +24,29 @@ void addTask()
         printf("\nTask list is full!\n");
     }
 }
+void viewtask()
+{
+    if (taskCount == 0)
+    {
+        printf("\nNo tasks were added yet!\n");
+    }
+    else
+    {
+        printf("\n-- YOUR TASKS --\n");
+        for (int i = 0; i < taskCount; i++)
+        {
+            printf("%d. %s", i + 1, tasks[i].name);
+            if (tasks[i].isDone == 1)
+            {
+                printf(" [Done]\n");
+            }
+            else
+            {
+                printf(" [Pending]\n");
+            }
+        }
+    }
+}
 int main()
 {
     int choice;
@@ -51,7 +74,7 @@ int main()
             addTask(); // addTask() function call
             break;
         case 2:
-            printf("\n[View tasks -Comming Soon]\n");
+            viewtask(); // viewTask() function call
             break;
         case 3:
             printf("\n[Search task -Comming Soon]\n");
