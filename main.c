@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 struct Task
 {
     char name[100]; // Stores task name max 100 characters
@@ -24,6 +25,7 @@ void addTask()
         printf("\nTask list is full!\n");
     }
 }
+
 void viewtask()
 {
     if (taskCount == 0)
@@ -47,6 +49,34 @@ void viewtask()
         }
     }
 }
+
+void editTask() // This editTask() function allows user to edit an existing task name
+{
+    if (taskCount == 0) // if no tasks added yet
+    {
+        printf("\nNo tasks added yet!\n");
+        return; // stop the function
+    }
+    viewtask(); // show all tasks so user can see which one to edit
+
+    int editChoice; // stores which task user wants to edit
+    printf("\nEnter task number to edit: ");
+    scanf("%d", &editChoice); // read task number
+
+    if (editChoice > 0 && editChoice <= taskCount) // check if valid task number
+    {
+        char newName[100]; // stores the new task name
+        printf("Enter new task name: ");
+        scanf(" %[^\n]", newName);                   // read new name including spaces
+        strcpy(tasks[editChoice - 1].name, newName); // strcpy() = copies newName into the selected task
+        printf("Task edited successfully!\n");
+    }
+    else
+    {
+        printf("\nInvalid task number!\n");
+    }
+}
+
 int main()
 {
     int choice;
@@ -77,7 +107,7 @@ int main()
             viewtask(); // viewTask() function call
             break;
         case 3:
-            printf("\n[Edit task -Comming Soon]\n");
+            editTask();
             break;
         case 4:
             printf("\n[Progress Report -Comming Soon]\n");
