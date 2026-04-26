@@ -61,7 +61,7 @@ int main()
         printf("---------------\n");
         printf("1. Add Tasks\n");
         printf("2. View Tasks\n");
-        printf("3. Search Tasks\n");
+        printf("3. Edit Task\n");
         printf("4. Progress Report\n");
         printf("5. Motivation Quote\n");
         printf("6. Exit\n");
@@ -77,7 +77,7 @@ int main()
             viewtask(); // viewTask() function call
             break;
         case 3:
-            printf("\n[Search task -Comming Soon]\n");
+            printf("\n[Edit task -Comming Soon]\n");
             break;
         case 4:
             printf("\n[Progress Report -Comming Soon]\n");
