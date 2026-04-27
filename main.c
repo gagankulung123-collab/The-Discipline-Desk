@@ -3,20 +3,18 @@
 #include <string.h>
 struct Task
 {
-    char name[100]; // Stores task name max 100 characters
-    int isDone;     // To check task status
+    char name[100]; 
+    int isDone;    
 };
 
-struct Task tasks[10]; // Array to hold upto 10 tasks
-int taskCount = 0;     // Counts how many tasks were added
-
+struct Task tasks[10]; 
+int taskCount = 0;     
 void addTask()
 {
     if (taskCount < 10)
     {
         printf("\nEnter task name: ");
-        fgets(tasks[taskCount].name, 100, stdin); // Reass the streing with the spaces
-        tasks[taskCount].name[strcspn(tasks[taskCount].name, "\n")] = '\0';
+        scanf(" %[^\n]",tasks[taskCount].name);
         tasks[taskCount].isDone = 0; // New task will always be pending
         taskCount++;
         printf("Task Added Successfully!\n");
@@ -53,23 +51,22 @@ void viewtask()
 
 void editTask() // This editTask() function allows user to edit an existing task name
 {
-    if (taskCount == 0) // if no tasks added yet
+    if (taskCount == 0) 
     {
         printf("\nNo tasks added yet!\n");
-        return; // stop the function
+        return; 
     }
     viewtask(); // show all tasks so user can see which one to edit
 
-    int editChoice; // stores which task user wants to edit
+    int editChoice; 
     printf("\nEnter task number to edit: ");
     scanf("%d", &editChoice);
 
-    if (editChoice > 0 && editChoice <= taskCount) // check if valid task number
+    if (editChoice > 0 && editChoice <= taskCount) 
     {
         char newName[100];
         printf("Enter new task name: ");
-        fgets(newName, 100, stdin);                  // read new name including spaces
-        newName[strcspn(newName, "\n")] = '\0';      // removes \n and adds '\0' terminator to end the string
+      scanf(" %[^\n]",newName);
         strcpy(tasks[editChoice - 1].name, newName); // strcpy copies newName into the selected task
         printf("Task edited successfully!\n");
     }
@@ -79,6 +76,54 @@ void editTask() // This editTask() function allows user to edit an existing task
     }
 }
 
+void progressReport() // This function will calculates and displays task status summary
+{
+    if (taskCount == 0)
+    {
+        printf("\nNo tasks added yet!\n");
+        return;
+    }
+
+    int completed = 0;
+    int pending = 0;
+
+    for (int i = 0; i < taskCount; i++)
+    {
+        if (tasks[i].isDone == 1) // isDone = 1 means task is completed
+        {
+            completed++;
+        }
+        else
+        {
+            pending++;
+        }
+    }
+
+    int productivity = (completed * 100) / taskCount; 
+
+    printf("\n--- PROGRESS REPORT ---\n");
+    printf("Total Tasks  : %d\n", taskCount);      
+    printf("Completed    : %d\n", completed);      
+    printf("Pending      : %d\n", pending);       
+    printf("Productivity : %d%%\n", productivity); // %% prints actual % symbol
+
+    if (productivity == 100)
+    {
+        printf("Excellent! All tasks completed!\n");
+    }
+    else if (productivity >= 50) 
+    {
+        printf("Good job! Keep going!\n");
+    }
+    else if (productivity > 0) 
+    {
+        printf("Keep pushing! You can do it!\n");
+    }
+    else 
+    {
+        printf("No tasks completed yet! Start now!\n");
+    }
+}
 int main()
 {
     int choice;
@@ -112,7 +157,7 @@ int main()
             editTask();
             break;
         case 4:
-            printf("\n[Progress Report -Comming Soon]\n");
+            progressReport();
             break;
         case 5:
             printf("\n[Motivation Quote -Comming Soon]\n");
