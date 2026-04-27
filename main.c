@@ -15,8 +15,9 @@ void addTask()
     if (taskCount < 10)
     {
         printf("\nEnter task name: ");
-        scanf(" %[^\n]", tasks[taskCount].name); // Reads full task name including spaces
-        tasks[taskCount].isDone = 0;             // New task will be always pending
+        fgets(tasks[taskCount].name, 100, stdin); // Reass the streing with the spaces
+        tasks[taskCount].name[strcspn(tasks[taskCount].name, "\n")] = '\0';
+        tasks[taskCount].isDone = 0; // New task will always be pending
         taskCount++;
         printf("Task Added Successfully!\n");
     }
@@ -60,15 +61,16 @@ void editTask() // This editTask() function allows user to edit an existing task
     viewtask(); // show all tasks so user can see which one to edit
 
     int editChoice; // stores which task user wants to edit
-    printf("\nEnter task number to edit: ");
-    scanf("%d", &editChoice); // read task number
+    printf("\nEnter task number to edit: "); 
+    scanf("%d", &editChoice); 
 
     if (editChoice > 0 && editChoice <= taskCount) // check if valid task number
     {
-        char newName[100]; // stores the new task name
+        char newName[100]; 
         printf("Enter new task name: ");
-        scanf(" %[^\n]", newName);                   // read new name including spaces
-        strcpy(tasks[editChoice - 1].name, newName); // strcpy() = copies newName into the selected task
+        fgets(newName, 100, stdin); // read new name including spaces
+        newName[strcspn(newName, "\n")] = '\0';   // removes \n and adds '\0' terminator to end the string   
+        strcpy(tasks[editChoice - 1].name, newName); // strcpy copies newName into the selected task 
         printf("Task edited successfully!\n");
     }
     else
