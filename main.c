@@ -61,16 +61,16 @@ void editTask() // This editTask() function allows user to edit an existing task
     viewtask(); // show all tasks so user can see which one to edit
 
     int editChoice; // stores which task user wants to edit
-    printf("\nEnter task number to edit: "); 
-    scanf("%d", &editChoice); 
+    printf("\nEnter task number to edit: ");
+    scanf("%d", &editChoice);
 
     if (editChoice > 0 && editChoice <= taskCount) // check if valid task number
     {
-        char newName[100]; 
+        char newName[100];
         printf("Enter new task name: ");
-        fgets(newName, 100, stdin); // read new name including spaces
-        newName[strcspn(newName, "\n")] = '\0';   // removes \n and adds '\0' terminator to end the string   
-        strcpy(tasks[editChoice - 1].name, newName); // strcpy copies newName into the selected task 
+        fgets(newName, 100, stdin);                  // read new name including spaces
+        newName[strcspn(newName, "\n")] = '\0';      // removes \n and adds '\0' terminator to end the string
+        strcpy(tasks[editChoice - 1].name, newName); // strcpy copies newName into the selected task
         printf("Task edited successfully!\n");
     }
     else
